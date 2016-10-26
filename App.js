@@ -19,12 +19,20 @@ import {
 
 export default class App extends Component {
   logoutFacebook = () => {
-    console.log('Logout with LoginManager========');
     LoginManager.logOut()
   }
 
+  getAuthToken = () => {
+    /**
+      If current user is not logged in to Facebook, the data will be null
+      Else data will contain the Auth Token information
+    **/
+    AccessToken.getCurrentAccessToken().then((data) => {
+      console.log('data==', data);
+    })
+  }
+
   loginWithFacebook = () => {
-    console.log('Login with LoginManager>>>>>>>');
     LoginManager.logInWithReadPermissions(['public_profile']).then(
       function(result) {
         if (result.isCancelled) {
@@ -51,11 +59,13 @@ export default class App extends Component {
         <Text style={styles.welcome} onPress={this.logoutFacebook}>
           Logout facebook via LoginManager
         </Text>
+        <Text style={styles.welcome} onPress={this.getAuthToken}>
+          Get Auth Token
+        </Text>
         <LoginButton
           publishPermissions={["publish_actions"]}
           onLoginFinished={
             (error, result) => {
-              console.log('Login with Login Button>>>>>>>');
               if (error) {
                 console.log("login has error: " + result.error);
               } else if (result.isCancelled) {
