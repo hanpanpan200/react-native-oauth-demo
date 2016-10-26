@@ -1,23 +1,16 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View
-} from 'react-native';
+} from 'react-native'
 import {
   LoginManager,
   LoginButton,
   AccessToken,
 } from 'react-native-fbsdk'
 
-export default class App extends Component {
+export default class FacebookLogin extends Component {
   logoutFacebook = () => {
     LoginManager.logOut()
   }
